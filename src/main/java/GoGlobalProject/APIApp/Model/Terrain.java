@@ -1,6 +1,10 @@
 package GoGlobalProject.APIApp.Model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Getter
@@ -8,20 +12,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="admin")
-public class Admin {
+@Table(name="terrain")
+public class Terrain {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="admin_id")
-    private long adminId;
+    @Column(name="terrain_id")
+    private long terrainId;
 
     @Column(name="name")
     private String name;
-
-    @Column(name="email")
-    private String email;
-
-    @Column(name="password")
-    private String password;
 }

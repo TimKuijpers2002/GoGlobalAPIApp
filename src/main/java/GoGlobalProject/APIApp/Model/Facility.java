@@ -8,20 +8,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="admin")
-public class Admin {
+@Table(name="facility")
+public class Facility {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="admin_id")
-    private long adminId;
+    @Column(name="facility_id")
+    private long facilityId;
 
     @Column(name="name")
     private String name;
-
-    @Column(name="email")
-    private String email;
-
-    @Column(name="password")
-    private String password;
 }

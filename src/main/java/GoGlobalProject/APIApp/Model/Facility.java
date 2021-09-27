@@ -18,4 +18,8 @@ public class Facility {
 
     @Column(name="name")
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name="location_id")
+    private Location location;
 }

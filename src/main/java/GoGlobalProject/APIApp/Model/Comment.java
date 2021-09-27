@@ -12,16 +12,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="terrain")
-public class Terrain {
+@Table(name="comment")
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="terrain_id")
-    private long terrainId;
+    @Column(name="comment_id")
+    private long commentId;
 
-    @Column(name="name")
-    private String name;
+    @Column(name="content")
+    private String content;
 
     @ManyToOne
     @JoinColumn(name="location_id")

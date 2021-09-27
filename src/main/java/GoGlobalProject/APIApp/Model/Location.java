@@ -26,18 +26,34 @@ public class Location {
     @Column(name="general_content")
     private String generalContent;
 
-    //@Column(name="Facilities")
-    //private List<Facility> facilities;
+    @OneToMany(
+            mappedBy="location",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Facility> facilities;
 
-    //@Column(name="Terrains")
-    //private List<Terrain> terrains;
+    @OneToMany(
+            mappedBy="location",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Terrain> terrains;
 
-    //@Column(name="Categories")
-    //private List<Category> categories;
+    @OneToMany(
+            mappedBy="location",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Category> categories;
 
     @Column(name="likes")
     private long likes;
 
-    //@Column(name="comments")
-    //private List<String> comments;
+    @OneToMany(
+            mappedBy="location",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Comment> comments;
 }

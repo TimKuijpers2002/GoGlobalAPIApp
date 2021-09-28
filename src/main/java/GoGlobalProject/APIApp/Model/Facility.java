@@ -2,6 +2,8 @@ package GoGlobalProject.APIApp.Model;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,7 +21,7 @@ public class Facility {
     @Column(name="name")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name="location_id")
-    private Location location;
+    //USED FOR CREATION OF TABLE IN DB
+    //@ManyToMany(mappedBy = "facilities", cascade = {CascadeType.ALL})
+    //private List<Location> locations = new ArrayList<>();
 }

@@ -26,24 +26,27 @@ public class Location {
     @Column(name="general_content")
     private String generalContent;
 
-    @OneToMany(
-            mappedBy="location",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "location_facility",
+            joinColumns = { @JoinColumn(name = "location_id") },
+            inverseJoinColumns = { @JoinColumn(name = "facility_id") }
     )
     private List<Facility> facilities;
 
-    @OneToMany(
-            mappedBy="location",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "location_terrain",
+            joinColumns = { @JoinColumn(name = "location_id") },
+            inverseJoinColumns = { @JoinColumn(name = "terrain_id") }
     )
     private List<Terrain> terrains;
 
-    @OneToMany(
-            mappedBy="location",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "location_category",
+            joinColumns = { @JoinColumn(name = "location_id") },
+            inverseJoinColumns = { @JoinColumn(name = "category_id") }
     )
     private List<Category> categories;
 

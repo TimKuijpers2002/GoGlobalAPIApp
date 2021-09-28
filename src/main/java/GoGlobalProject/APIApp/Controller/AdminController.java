@@ -16,20 +16,39 @@ public class AdminController {
     @Autowired
     private AdminRepository adminRepository;
 
-    @GetMapping("/admin")
+    @GetMapping("/admins")
     public List<Admin> GetAllAdmin(){
         return adminRepository.findAll();
     }
 
-    @PostMapping("/admin")
+    @PostMapping("/admins")
     public Admin CreateAdmin(@RequestBody Admin admin){
         return adminRepository.save(admin);
     }
 
-    @PutMapping("/admin/{id}")
-    public ResponseEntity<Admin> UpdateAdmin(@PathVariable(value = "id") long admin_id) throws ResourceNotFoundException {
+    @GetMapping("/admins/{id}")
+    public ResponseEntity<Admin> GetAdminById(@PathVariable(value = "id") long admin_id) throws ResourceNotFoundException {
         Admin admin = adminRepository.findById(admin_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Admin could not be found for id:" + admin_id));
         return ResponseEntity.ok().body(admin);
+    }
+
+    @PutMapping("/admins/{id}")
+    public ResponseEntity<Admin> UpdateAdmin(@PathVariable(value = "id") long admin_id, @RequestBody Admin adminDetails) throws ResourceNotFoundException {
+        Admin admin = adminRepository.findById(admin_id)
+                .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Admin could not be found for id:" + admin_id));
+        admin.setName(adminDetails.getName());
+        admin.setEmail(adminDetails.getPassword());
+        admin.setPassword(adminDetails.getPassword());
+        adminRepository.save(admin);
+        return ResponseEntity.ok().body(admin);
+    }
+
+    @DeleteMapping("/admins/{id}")
+    public ResponseEntity<?> DeleteAdmin(@PathVariable(value = "id") long admin_id) throws ResourceNotFoundException {
+        adminRepository.findById(admin_id)
+                .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Admin could not be found for id:" + admin_id));
+        adminRepository.deleteById(admin_id);
+        return ResponseEntity.ok().build();
     }
 }

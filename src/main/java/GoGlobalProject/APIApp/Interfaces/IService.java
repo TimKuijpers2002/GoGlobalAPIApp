@@ -8,9 +8,9 @@ public interface IService<T> {
 
     List<T> GetAll();
 
-    T Create(T t);
+    boolean Create(T t);
 
-    void Update(T tOriginal, T tDetails, long id);
+    boolean Update(T tOriginal, T tDetails, long id);
 
     void Delete(long id);
 }

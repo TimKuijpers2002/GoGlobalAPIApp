@@ -22,31 +22,35 @@ public class AdminController {
     @Autowired
     private IService<Admin> adminService;
 
+    @GetMapping("/admins/{id}")
+    public ResponseEntity<?> GetAdminById(@PathVariable(value = "id") long admin_id) throws ResourceNotFoundException {
+        Admin admin = adminRepository.findById(admin_id)
+                .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Admin could not be found for id:" + admin_id));
+        return ResponseEntity.ok().body(admin);
+    }
+
     @GetMapping("/admins")
     public List<Admin> GetAllAdmin(){
         return adminRepository.findAll();
     }
 
     @PostMapping("/admins")
-    public Admin CreateAdmin(@RequestBody Admin admin){
-        return adminService.Create(admin);
-    }
-
-    @GetMapping("/admins/{id}")
-    public ResponseEntity<Admin> GetAdminById(@PathVariable(value = "id") long admin_id) throws ResourceNotFoundException {
-        Admin admin = adminRepository.findById(admin_id)
-                .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Admin could not be found for id:" + admin_id));
+    public ResponseEntity<?> CreateAdmin(@RequestBody Admin admin){
+        boolean hasError = adminService.Create(admin);
+        if(hasError){
+            return ResponseEntity.badRequest().body("Admin already exist for email:" + admin.getEmail());
+        }
         return ResponseEntity.ok().body(admin);
     }
 
     @PutMapping("/admins/{id}")
-    public ResponseEntity<Admin> UpdateAdmin(@PathVariable(value = "id") long admin_id, @RequestBody Admin adminDetails) throws ResourceNotFoundException {
+    public ResponseEntity<?> UpdateAdmin(@PathVariable(value = "id") long admin_id, @RequestBody Admin adminDetails) throws Exception {
         Admin admin = adminRepository.findById(admin_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Admin could not be found for id:" + admin_id));
-        admin.setName(adminDetails.getName());
-        admin.setEmail(adminDetails.getPassword());
-        admin.setPassword(adminDetails.getPassword());
-        adminRepository.save(admin);
+        boolean hasError = adminService.Update(admin, adminDetails, admin_id);
+        if(hasError){
+            return ResponseEntity.badRequest().body("Admin already exist for email:" + adminDetails.getEmail());
+        }
         return ResponseEntity.ok().body(admin);
     }
 

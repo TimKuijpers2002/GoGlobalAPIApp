@@ -1,9 +1,11 @@
 package GoGlobalProject.APIApp.Controller;
 
+import GoGlobalProject.APIApp.Interfaces.IService;
 import GoGlobalProject.APIApp.Model.Admin;
 import GoGlobalProject.APIApp.Repository.AdminRepository;
-import GoGlobalProject.APIApp.Services.ResourceNotFoundException;
+import GoGlobalProject.APIApp.CustomError.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,10 @@ public class AdminController {
     @Autowired
     private AdminRepository adminRepository;
 
+    @Qualifier("adminService")
+    @Autowired
+    private IService<Admin> adminService;
+
     @GetMapping("/admins")
     public List<Admin> GetAllAdmin(){
         return adminRepository.findAll();
@@ -23,7 +29,7 @@ public class AdminController {
 
     @PostMapping("/admins")
     public Admin CreateAdmin(@RequestBody Admin admin){
-        return adminRepository.save(admin);
+        return adminService.Create(admin);
     }
 
     @GetMapping("/admins/{id}")

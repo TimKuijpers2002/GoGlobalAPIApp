@@ -54,7 +54,7 @@ public class Location {
     private long likes;
 
     @OneToMany(
-            mappedBy="location",
+            mappedBy = "location",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )

@@ -1,4 +1,4 @@
-package GoGlobalProject.APIApp.Services;
+package GoGlobalProject.APIApp.CustomError;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class Comment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name="comment_id")
     private long commentId;
 
@@ -24,6 +24,6 @@ public class Comment {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name="location_id")
+    @JoinColumn(name="location_id", nullable=false)
     private Location location;
 }

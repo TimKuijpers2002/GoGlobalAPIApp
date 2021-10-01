@@ -11,5 +11,5 @@ export const checkStatus = response => {
 }
 
 export const getAllAdmins = () =>
-    fetch("api/admin")
+    fetch("api/admins")
         .then(checkStatus);

@@ -2,7 +2,7 @@ package GoGlobalProject.APIApp.Controller;
 
 import GoGlobalProject.APIApp.Model.Location;
 import GoGlobalProject.APIApp.Repository.LocationRepository;
-import GoGlobalProject.APIApp.Services.ResourceNotFoundException;
+import GoGlobalProject.APIApp.CustomError.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

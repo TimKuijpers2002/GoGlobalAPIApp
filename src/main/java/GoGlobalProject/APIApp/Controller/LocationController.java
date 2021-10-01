@@ -1,9 +1,12 @@
 package GoGlobalProject.APIApp.Controller;
 
+import GoGlobalProject.APIApp.Interfaces.IService;
+import GoGlobalProject.APIApp.Model.Admin;
 import GoGlobalProject.APIApp.Model.Location;
 import GoGlobalProject.APIApp.Repository.LocationRepository;
 import GoGlobalProject.APIApp.CustomError.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,15 +19,9 @@ public class LocationController {
     @Autowired
     private LocationRepository locationRepository;
 
-    @GetMapping("/locations")
-    public List<Location> GetAllLocation(){
-        return locationRepository.findAll();
-    }
-
-    @PostMapping("/locations")
-    public Location CreateLocation(@RequestBody Location location){
-        return locationRepository.save(location);
-    }
+    @Qualifier("locationService")
+    @Autowired
+    private IService<Location> locationService;
 
     @GetMapping("/locations/{id}")
     public ResponseEntity<Location> GetLocationById(@PathVariable(value = "id") long location_id) throws ResourceNotFoundException {
@@ -33,20 +30,28 @@ public class LocationController {
         return ResponseEntity.ok().body(location);
     }
 
+    @GetMapping("/locations")
+    public List<Location> GetAllLocation(){
+        return locationService.GetAll();
+    }
+
+    @PostMapping("/locations")
+    public ResponseEntity<?> CreateLocation(@RequestBody Location location){
+        boolean hasError = locationService.Create(location);
+        if(hasError){
+            return ResponseEntity.badRequest().body("Location already exist for coordinates:" + location.getCoordinates());
+        }
+        return ResponseEntity.ok().body(location);
+    }
+
     @PutMapping("/locations/{id}")
-    public ResponseEntity<Location> UpdateLocation(@PathVariable(value = "id") long location_id, @RequestBody Location locationDetails) throws ResourceNotFoundException {
+    public ResponseEntity<?> UpdateLocation(@PathVariable(value = "id") long location_id, @RequestBody Location locationDetails) throws ResourceNotFoundException {
         Location location = locationRepository.findById(location_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Location could not be found for id:" + location_id));
-        location.setCoordinates(locationDetails.getCoordinates());
-        location.setName(locationDetails.getName());
-        location.setGeneralContent(locationDetails.getGeneralContent());
-        location.setFacilities(locationDetails.getFacilities());
-        location.setTerrains(locationDetails.getTerrains());
-        location.setCategories(locationDetails.getCategories());
-        location.setLikes(locationDetails.getLikes());
-        location.setComments(locationDetails.getComments());
-
-        locationRepository.save(location);
+        boolean hasError = locationService.Create(location);
+        if(hasError){
+            return ResponseEntity.badRequest().body("Location already exist for coordinates:" + location.getCoordinates());
+        }
         return ResponseEntity.ok().body(location);
     }
 

@@ -47,7 +47,7 @@ public class AdminController {
     public ResponseEntity<?> UpdateAdmin(@PathVariable(value = "id") long admin_id, @RequestBody Admin adminDetails) throws Exception {
         Admin admin = adminRepository.findById(admin_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Admin could not be found for id:" + admin_id));
-        boolean hasError = adminService.Update(admin, adminDetails, admin_id);
+        boolean hasError = adminService.Update(admin, adminDetails);
         if(hasError){
             return ResponseEntity.badRequest().body("Admin already exist for email:" + adminDetails.getEmail());
         }

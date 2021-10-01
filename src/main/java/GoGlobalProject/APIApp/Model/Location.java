@@ -52,11 +52,4 @@ public class Location {
 
     @Column(name="likes")
     private long likes;
-
-    @OneToMany(
-            mappedBy = "location",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<Comment> comments;
 }

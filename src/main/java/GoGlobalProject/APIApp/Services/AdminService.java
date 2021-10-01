@@ -34,7 +34,7 @@ public class AdminService implements IService<Admin> {
     }
 
     @Override
-    public boolean Update(Admin adminOriginal, Admin adminDetails, long admin_id) {
+    public boolean Update(Admin adminOriginal, Admin adminDetails) {
         if(CheckForDoubleEmails(adminDetails)){
             return CheckForDoubleEmails(adminDetails);
         }

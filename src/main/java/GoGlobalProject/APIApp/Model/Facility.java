@@ -20,8 +20,4 @@ public class Facility {
 
     @Column(name="name")
     private String name;
-
-    //USED FOR CREATION OF TABLE IN DB
-    //@ManyToMany(mappedBy = "facilities", cascade = {CascadeType.ALL})
-    //private List<Location> locations = new ArrayList<>();
 }

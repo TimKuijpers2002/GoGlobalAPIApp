@@ -25,7 +25,4 @@ public class Category {
     @Column(name="name")
     private String name;
 
-    //USED FOR CREATION OF TABLE IN DB
-    //@ManyToMany(mappedBy = "categories", cascade = {CascadeType.ALL})
-    //private List<Location> locations = new ArrayList<>();
 }

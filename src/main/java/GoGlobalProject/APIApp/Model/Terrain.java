@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -25,7 +23,4 @@ public class Terrain {
     @Column(name="name")
     private String name;
 
-    //USED FOR CREATION OF TABLE IN DB
-    //@ManyToMany(mappedBy = "terrains", cascade = {CascadeType.ALL})
-    //private List<Location> locations = new ArrayList<>();
 }

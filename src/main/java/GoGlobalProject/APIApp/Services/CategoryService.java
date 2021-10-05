@@ -15,11 +15,6 @@ public class CategoryService implements IService<Category> {
     private CategoryRepository categoryRepository;
 
     @Override
-    public Category GetById(long category_id) {
-        return categoryRepository.findById(category_id).get();
-    }
-
-    @Override
     public List<Category> GetAll() {
         return categoryRepository.findAll();
     }

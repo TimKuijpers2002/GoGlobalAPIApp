@@ -15,11 +15,6 @@ public class AdminService implements IService<Admin> {
     private AdminRepository adminRepository;
 
     @Override
-    public Admin GetById(long admin_id) {
-        return adminRepository.findById(admin_id).get();
-    }
-
-    @Override
     public List<Admin> GetAll() {
         return adminRepository.findAll();
     }

@@ -15,11 +15,6 @@ public class LocationService implements IService<Location> {
     private LocationRepository locationRepository;
 
     @Override
-    public Location GetById(long location_id) {
-        return locationRepository.findById(location_id).get();
-    }
-
-    @Override
     public List<Location> GetAll() {
         return locationRepository.findAll();
     }

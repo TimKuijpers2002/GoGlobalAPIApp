@@ -16,11 +16,6 @@ public class TerrainService implements IService<Terrain> {
     private TerrainRepository terrainRepository;
 
     @Override
-    public Terrain GetById(long terrain_id) {
-        return terrainRepository.findById(terrain_id).get();
-    }
-
-    @Override
     public List<Terrain> GetAll() {
         return terrainRepository.findAll();
     }

@@ -2,14 +2,17 @@ package GoGlobalProject.APIApp.Controller;
 
 import GoGlobalProject.APIApp.CustomError.ResourceNotFoundException;
 import GoGlobalProject.APIApp.Interfaces.IService;
+import GoGlobalProject.APIApp.Model.Category;
 import GoGlobalProject.APIApp.Model.Facility;
 import GoGlobalProject.APIApp.Repository.FacilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api")
@@ -30,8 +33,14 @@ public class FacilityController {
     }
 
     @GetMapping("/facilities")
-    public List<Facility> GetAllFacilityTypes(){
-        return facilityRepository.findAll();
+    public ResponseEntity<?> GetAllFacilityTypes(){
+        try {
+            List<Facility> facilityList = facilityService.GetAll();
+            return ResponseEntity.ok().body(facilityList);
+        } catch (
+                NoSuchElementException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/facilities")

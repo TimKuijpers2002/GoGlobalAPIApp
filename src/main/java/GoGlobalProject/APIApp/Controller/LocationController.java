@@ -2,15 +2,18 @@ package GoGlobalProject.APIApp.Controller;
 
 import GoGlobalProject.APIApp.Interfaces.IService;
 import GoGlobalProject.APIApp.Model.Admin;
+import GoGlobalProject.APIApp.Model.Category;
 import GoGlobalProject.APIApp.Model.Location;
 import GoGlobalProject.APIApp.Repository.LocationRepository;
 import GoGlobalProject.APIApp.CustomError.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api")
@@ -31,8 +34,14 @@ public class LocationController {
     }
 
     @GetMapping("/locations")
-    public List<Location> GetAllLocation(){
-        return locationService.GetAll();
+    public ResponseEntity<?> GetAllLocation(){
+        try {
+            List<Location> locationList = locationService.GetAll();
+            return ResponseEntity.ok().body(locationList);
+        } catch (
+                NoSuchElementException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/locations")

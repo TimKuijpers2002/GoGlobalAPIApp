@@ -2,14 +2,17 @@ package GoGlobalProject.APIApp.Controller;
 
 import GoGlobalProject.APIApp.CustomError.ResourceNotFoundException;
 import GoGlobalProject.APIApp.Interfaces.IService;
+import GoGlobalProject.APIApp.Model.Category;
 import GoGlobalProject.APIApp.Model.Terrain;
 import GoGlobalProject.APIApp.Repository.TerrainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api")
@@ -30,8 +33,14 @@ public class TerrainController {
     }
 
     @GetMapping("/terrains")
-    public List<Terrain> GetAllTerrainTypes(){
-        return terrainRepository.findAll();
+    public ResponseEntity<?> GetAllTerrainTypes(){
+        try {
+            List<Terrain> terrainList = terrainService.GetAll();
+            return ResponseEntity.ok().body(terrainList);
+        } catch (
+                NoSuchElementException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/terrains")

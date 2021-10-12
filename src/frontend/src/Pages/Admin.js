@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {Empty, Spin, Table} from "antd";
+import {Button, Empty, Spin, Table} from "antd";
+import axios from 'axios';
 import {LoadingOutlined} from "@ant-design/icons";
-import {getAllAdmins} from "../Services/admin";
 import {Sidebar} from "../Components/Sidebar"
 
 const columns = [
@@ -32,18 +32,17 @@ export default function Admin() {
     const [admins, setAdmins] = useState([]);
     const [fetching, setFetching] = useState(true);
 
-    const fetchAdmins = () =>
-        getAllAdmins()
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setAdmins(data);
+    const getAdmins = () =>
+        axios.get("api/admins")
+            .then(res => {
+                console.log(res);
+                setAdmins(res.data);
                 setFetching(false);
             })
 
     useEffect(() => {
         console.log("component is mounted");
-        fetchAdmins();
+        getAdmins().then(r => console.log(r));
     }, []);
 
     const renderAdmins = () => {
@@ -65,8 +64,9 @@ export default function Admin() {
 
     }
     return (
-        <Sidebar data={
+        <Sidebar name="Admin" data={
             <div>
+                <Button onClick={() => {window.location.pathname = "/Admin/Create"}}>Create admin</Button>
                 {renderAdmins()}
             </div>
         }/>

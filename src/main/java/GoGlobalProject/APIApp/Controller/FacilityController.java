@@ -56,7 +56,7 @@ public class FacilityController {
     public ResponseEntity<?> UpdateFacility(@PathVariable(value = "id") long facility_id, @RequestBody Facility facilityDetails) throws Exception {
         Facility facility = facilityRepository.findById(facility_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Facility could not be found for id:" + facility_id));
-        boolean hasError = facilityService.Update(facility, facilityDetails);
+        boolean hasError = facilityService.Update(facility_id, facilityDetails);
         if(hasError){
             return ResponseEntity.badRequest().body("Facility already exist for name:" + facilityDetails.getName());
         }
@@ -67,7 +67,7 @@ public class FacilityController {
     public ResponseEntity<?> DeleteFacility(@PathVariable(value = "id") long facility_id) throws ResourceNotFoundException {
         facilityRepository.findById(facility_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Facility could not be found for id:" + facility_id));
-        facilityRepository.deleteById(facility_id);
+        facilityService.Delete(facility_id);
         return ResponseEntity.ok().build();
     }
 }

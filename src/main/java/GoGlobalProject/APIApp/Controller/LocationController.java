@@ -1,5 +1,6 @@
 package GoGlobalProject.APIApp.Controller;
 
+import GoGlobalProject.APIApp.Interfaces.ILocationService;
 import GoGlobalProject.APIApp.Interfaces.IService;
 import GoGlobalProject.APIApp.Model.Admin;
 import GoGlobalProject.APIApp.Model.Category;
@@ -24,7 +25,7 @@ public class LocationController {
 
     @Qualifier("locationService")
     @Autowired
-    private IService<Location> locationService;
+    private ILocationService<Location> locationService;
 
     @GetMapping("/locations/{id}")
     public ResponseEntity<Location> GetLocationById(@PathVariable(value = "id") long location_id) throws ResourceNotFoundException {
@@ -57,7 +58,7 @@ public class LocationController {
     public ResponseEntity<?> UpdateLocation(@PathVariable(value = "id") long location_id, @RequestBody Location locationDetails) throws ResourceNotFoundException {
         Location location = locationRepository.findById(location_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Location could not be found for id:" + location_id));
-        boolean hasError = locationService.Create(location);
+        boolean hasError = locationService.Update(location_id, locationDetails);
         if(hasError){
             return ResponseEntity.badRequest().body("Location already exist for coordinates:" + location.getCoordinates());
         }
@@ -68,7 +69,15 @@ public class LocationController {
     public ResponseEntity<?> DeleteLocation(@PathVariable(value = "id") long location_id) throws ResourceNotFoundException {
         locationRepository.findById(location_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Location could not be found for id:" + location_id));
-        locationRepository.deleteById(location_id);
+        locationService.Delete(location_id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/locations/like/{id}")
+    public ResponseEntity<?> LikeLocation(@PathVariable(value = "id") long location_id) throws ResourceNotFoundException {
+        locationRepository.findById(location_id)
+                .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Location could not be found for id:" + location_id));
+        locationService.LikeLocation(location_id);
         return ResponseEntity.ok().build();
     }
 }

@@ -15,6 +15,10 @@ public class TerrainService implements IService<Terrain> {
     @Autowired
     private TerrainRepository terrainRepository;
 
+    public Terrain GetById(long terrain_id){
+        return terrainRepository.findById(terrain_id).get();
+    }
+
     @Override
     public List<Terrain> GetAll() {
         return terrainRepository.findAll();
@@ -30,7 +34,8 @@ public class TerrainService implements IService<Terrain> {
     }
 
     @Override
-    public boolean Update(Terrain terrainOriginal, Terrain terrainDetails) {
+    public boolean Update(long terrain_id, Terrain terrainDetails) {
+        Terrain terrainOriginal = GetById(terrain_id);
         if(CheckForDoubleName(terrainDetails)){
             return CheckForDoubleName(terrainDetails);
         }

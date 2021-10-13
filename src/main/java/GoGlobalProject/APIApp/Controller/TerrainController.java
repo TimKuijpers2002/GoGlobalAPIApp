@@ -56,7 +56,7 @@ public class TerrainController {
     public ResponseEntity<?> UpdateTerrain(@PathVariable(value = "id") long terrain_id, @RequestBody Terrain terrainDetails) throws Exception {
         Terrain terrain = terrainRepository.findById(terrain_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Terrain could not be found for id:" + terrain_id));
-        boolean hasError = terrainService.Update(terrain, terrainDetails);
+        boolean hasError = terrainService.Update(terrain_id, terrainDetails);
         if(hasError){
             return ResponseEntity.badRequest().body("Terrain already exist for name:" + terrainDetails.getName());
         }
@@ -67,7 +67,7 @@ public class TerrainController {
     public ResponseEntity<?> DeleteTerrain(@PathVariable(value = "id") long terrain_id) throws ResourceNotFoundException {
         terrainRepository.findById(terrain_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Terrain could not be found for id:" + terrain_id));
-        terrainRepository.deleteById(terrain_id);
+        terrainService.Delete(terrain_id);
         return ResponseEntity.ok().build();
     }
 }

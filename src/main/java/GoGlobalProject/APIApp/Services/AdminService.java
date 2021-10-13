@@ -2,6 +2,7 @@ package GoGlobalProject.APIApp.Services;
 
 import GoGlobalProject.APIApp.Interfaces.IService;
 import GoGlobalProject.APIApp.Model.Admin;
+import GoGlobalProject.APIApp.Model.Location;
 import GoGlobalProject.APIApp.Repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,10 @@ public class AdminService implements IService<Admin> {
 
     @Autowired
     private AdminRepository adminRepository;
+
+    public Admin GetById(long admin_id){
+        return adminRepository.findById(admin_id).get();
+    }
 
     @Override
     public List<Admin> GetAll() {
@@ -29,7 +34,8 @@ public class AdminService implements IService<Admin> {
     }
 
     @Override
-    public boolean Update(Admin adminOriginal, Admin adminDetails) {
+    public boolean Update(long admin_id, Admin adminDetails) {
+        Admin adminOriginal = GetById(admin_id);
         if(CheckForDoubleEmails(adminDetails)){
             return CheckForDoubleEmails(adminDetails);
         }

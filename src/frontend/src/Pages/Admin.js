@@ -66,7 +66,7 @@ export default function Admin() {
     return (
         <Sidebar name="Admin" data={
             <div>
-                <Button onClick={() => {window.location.pathname = "/Admin/Create"}}>Create admin</Button>
+                <Button onClick={() => {window.location.pathname = "/AdminCreate"}}>Create admin</Button>
                 {renderAdmins()}
             </div>
         }/>

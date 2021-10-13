@@ -15,7 +15,7 @@ function App() {
     <Router>
       <Route path="/" exact component={Home}/>
       <Route path="/Admin" exact component={Admin}/>
-        <Route path="/Admin/Create" exact component={POSTAdmin}/>
+      <Route path="/AdminCreate" exact component={POSTAdmin}/>
       <Route path="/Location" exact component={Location}/>
       <Route path="/LocationSubmit" exact component={LocationSubmit}/>
       <Route path="/Profile" exact component={Profile}/>

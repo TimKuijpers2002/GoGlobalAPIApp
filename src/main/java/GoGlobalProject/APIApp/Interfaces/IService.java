@@ -8,7 +8,7 @@ public interface IService<T> {
 
     boolean Create(T t);
 
-    boolean Update(T tOriginal, T tDetails);
+    boolean Update(long tId, T tDetails);
 
     void Delete(long id);
 }

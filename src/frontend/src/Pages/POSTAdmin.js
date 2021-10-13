@@ -20,6 +20,7 @@ export default function PostAdmin() {
             case "Password" :
                 setPassword(e.target.value);
                 break;
+            default:
         }
     }
     const headers = {
@@ -33,7 +34,7 @@ export default function PostAdmin() {
     }
     function SubmitHandler(e) {
         e.preventDefault()
-        axios.post("api/admins", JSON.stringify(properties) , {
+        axios.post("./api/admins", JSON.stringify(properties) , {
             headers: headers
         })
             .then(res => {
@@ -41,9 +42,8 @@ export default function PostAdmin() {
             })
     }
 
-
     return (
-        <Sidebar name="Admin" data={
+        <Sidebar name="Admin Create" data={
             <div>
                 <Form>
                     <Space direction="vertical">

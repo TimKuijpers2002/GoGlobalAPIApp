@@ -56,7 +56,7 @@ public class CategoryController {
     public ResponseEntity<?> UpdateCategory(@PathVariable(value = "id") long category_id, @RequestBody Category categoryDetails) throws Exception {
         Category category = categoryRepository.findById(category_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Category could not be found for id:" + category_id));
-        boolean hasError = categoryService.Update(category, categoryDetails);
+        boolean hasError = categoryService.Update(category_id, categoryDetails);
         if(hasError){
             return ResponseEntity.badRequest().body("Category already exist for name:" + categoryDetails.getName());
         }
@@ -67,7 +67,7 @@ public class CategoryController {
     public ResponseEntity<?> DeleteCategory(@PathVariable(value = "id") long category_id) throws ResourceNotFoundException {
         categoryRepository.findById(category_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Category could not be found for id:" + category_id));
-        categoryRepository.deleteById(category_id);
+        categoryService.Delete(category_id);
         return ResponseEntity.ok().build();
     }
 }

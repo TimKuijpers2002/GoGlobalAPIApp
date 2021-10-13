@@ -1,6 +1,7 @@
 package GoGlobalProject.APIApp.Services;
 
 import GoGlobalProject.APIApp.Interfaces.IService;
+import GoGlobalProject.APIApp.Model.Admin;
 import GoGlobalProject.APIApp.Model.Category;
 import GoGlobalProject.APIApp.Repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,10 @@ public class CategoryService implements IService<Category> {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    public Category GetById(long category_id){
+        return categoryRepository.findById(category_id).get();
+    }
 
     @Override
     public List<Category> GetAll() {
@@ -29,7 +34,8 @@ public class CategoryService implements IService<Category> {
     }
 
     @Override
-    public boolean Update(Category categoryOriginal, Category categoryDetails) {
+    public boolean Update(long category_id, Category categoryDetails) {
+        Category categoryOriginal = GetById(category_id);
         if(CheckForDoubleName(categoryDetails)){
             return CheckForDoubleName(categoryDetails);
         }

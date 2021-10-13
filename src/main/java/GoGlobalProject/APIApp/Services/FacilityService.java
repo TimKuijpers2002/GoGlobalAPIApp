@@ -1,6 +1,7 @@
 package GoGlobalProject.APIApp.Services;
 
 import GoGlobalProject.APIApp.Interfaces.IService;
+import GoGlobalProject.APIApp.Model.Admin;
 import GoGlobalProject.APIApp.Model.Facility;
 import GoGlobalProject.APIApp.Repository.FacilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,10 @@ public class FacilityService implements IService<Facility> {
 
     @Autowired
     private FacilityRepository facilityRepository;
+
+    public Facility GetById(long facility_id){
+        return facilityRepository.findById(facility_id).get();
+    }
 
     @Override
     public List<Facility> GetAll() {
@@ -29,7 +34,8 @@ public class FacilityService implements IService<Facility> {
     }
 
     @Override
-    public boolean Update(Facility facilityOriginal, Facility facilityDetails) {
+    public boolean Update(long facility_id, Facility facilityDetails) {
+        Facility facilityOriginal = GetById(facility_id);
         if(CheckForDoubleName(facilityDetails)){
             return CheckForDoubleName(facilityDetails);
         }

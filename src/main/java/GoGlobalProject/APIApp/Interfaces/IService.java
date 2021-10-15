@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface IService<T> {
 
+    T GetById(long id);
+
     List<T> GetAll();
 
     boolean Create(T t);

@@ -15,6 +15,7 @@ public class FacilityService implements IService<Facility> {
     @Autowired
     private FacilityRepository facilityRepository;
 
+    @Override
     public Facility GetById(long facility_id){
         return facilityRepository.findById(facility_id).get();
     }

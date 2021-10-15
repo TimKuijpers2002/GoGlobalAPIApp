@@ -2,7 +2,6 @@ package GoGlobalProject.APIApp.Services;
 
 import GoGlobalProject.APIApp.Interfaces.IService;
 import GoGlobalProject.APIApp.Model.Admin;
-import GoGlobalProject.APIApp.Model.Location;
 import GoGlobalProject.APIApp.Repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +14,7 @@ public class AdminService implements IService<Admin> {
     @Autowired
     private AdminRepository adminRepository;
 
+    @Override
     public Admin GetById(long admin_id){
         return adminRepository.findById(admin_id).get();
     }

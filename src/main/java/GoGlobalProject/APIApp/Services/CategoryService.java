@@ -15,6 +15,7 @@ public class CategoryService implements IService<Category> {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Override
     public Category GetById(long category_id){
         return categoryRepository.findById(category_id).get();
     }

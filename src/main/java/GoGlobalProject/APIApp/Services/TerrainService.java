@@ -15,6 +15,7 @@ public class TerrainService implements IService<Terrain> {
     @Autowired
     private TerrainRepository terrainRepository;
 
+    @Override
     public Terrain GetById(long terrain_id){
         return terrainRepository.findById(terrain_id).get();
     }

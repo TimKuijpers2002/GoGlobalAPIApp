@@ -14,8 +14,9 @@ public class LocationService implements ILocationService<Location> {
     @Autowired
     private LocationRepository locationRepository;
 
-    public Location GetById(long locationId){
-        return locationRepository.findById(locationId).get();
+    @Override
+    public Location GetById(long location_id){
+        return locationRepository.findById(location_id).get();
     }
 
     @Override
@@ -33,8 +34,8 @@ public class LocationService implements ILocationService<Location> {
     }
 
     @Override
-    public boolean Update(long locationId, Location locationDetails) {
-        Location locationOriginal = GetById(locationId);
+    public boolean Update(long location_id, Location locationDetails) {
+        Location locationOriginal = GetById(location_id);
         if(CheckForDoubleCoordinates(locationDetails)){
             return CheckForDoubleCoordinates(locationDetails);
         }
@@ -67,8 +68,8 @@ public class LocationService implements ILocationService<Location> {
     }
 
     @Override
-    public void LikeLocation(long locationId) {
-        Location location = GetById(locationId);
+    public void LikeLocation(long location_id) {
+        Location location = GetById(location_id);
         long oldLikes = location.getLikes();
         oldLikes++;
         location.setLikes(oldLikes);

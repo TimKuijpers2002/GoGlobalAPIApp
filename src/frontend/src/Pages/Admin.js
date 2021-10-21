@@ -56,7 +56,7 @@ export default function Admin() {
             dataSource={admins}
             columns={columns}
             bordered
-            title={() => 'Admins'}
+            title={() => 'Admins:'}
             pagination={{ pageSize: 50 }}
             scroll={{ y: 240 }}
             rowKey = {(admin) => admin.id}

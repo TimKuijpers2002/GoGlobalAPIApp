@@ -46,7 +46,7 @@ public class AdminController {
     public ResponseEntity<?> CreateAdmin(@RequestBody Admin admin){
         boolean hasError = adminService.Create(admin);
         if(hasError){
-            return ResponseEntity.badRequest().body("Admin already exist for email:" + admin.getEmail());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Admin already exist for email:" + admin.getEmail());
         }
         return ResponseEntity.ok().body(admin);
     }
@@ -57,7 +57,7 @@ public class AdminController {
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Admin could not be found for id:" + admin_id));
         boolean hasError = adminService.Update(admin_id, adminDetails);
         if(hasError){
-            return ResponseEntity.badRequest().body("Admin already exist for email:" + adminDetails.getEmail());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Admin already exist for email:" + adminDetails.getEmail());
         }
         return ResponseEntity.ok().body(admin);
     }

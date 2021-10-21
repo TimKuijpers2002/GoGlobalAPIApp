@@ -35,11 +35,9 @@ export default function PostAdmin() {
     function SubmitHandler(e) {
         e.preventDefault()
         axios.post("./api/admins", JSON.stringify(properties) , {
-            headers: headers
-        })
-            .then(res => {
-                console.log(res.data)
-            })
+            headers: headers})
+            .then()
+            .catch(err => console.log(err))
     }
 
     return (

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -35,7 +35,7 @@ public class LocationForm {
             joinColumns = { @JoinColumn(name = "location_form_id") },
             inverseJoinColumns = { @JoinColumn(name = "facility_id") }
     )
-    private List<Facility> facilities;
+    private Set<Facility> facilities;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
@@ -43,7 +43,7 @@ public class LocationForm {
             joinColumns = { @JoinColumn(name = "location_form_id") },
             inverseJoinColumns = { @JoinColumn(name = "category_id") }
     )
-    private List<Category> categories;
+    private Set<Category> categories;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
@@ -51,5 +51,5 @@ public class LocationForm {
             joinColumns = { @JoinColumn(name = "location_form_id") },
             inverseJoinColumns = { @JoinColumn(name = "terrain_id") }
     )
-    private List<Terrain> terrains;
+    private Set<Terrain> terrains;
 }

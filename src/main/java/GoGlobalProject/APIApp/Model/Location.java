@@ -2,7 +2,7 @@ package GoGlobalProject.APIApp.Model;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -32,7 +32,7 @@ public class Location {
             joinColumns = { @JoinColumn(name = "location_id") },
             inverseJoinColumns = { @JoinColumn(name = "facility_id") }
     )
-    private List<Facility> facilities;
+    private Set<Facility> facilities;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
@@ -40,7 +40,7 @@ public class Location {
             joinColumns = { @JoinColumn(name = "location_id") },
             inverseJoinColumns = { @JoinColumn(name = "terrain_id") }
     )
-    private List<Terrain> terrains;
+    private Set<Terrain> terrains;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
@@ -48,7 +48,7 @@ public class Location {
             joinColumns = { @JoinColumn(name = "location_id") },
             inverseJoinColumns = { @JoinColumn(name = "category_id") }
     )
-    private List<Category> categories;
+    private Set<Category> categories;
 
     @Column(name="likes")
     private long likes;

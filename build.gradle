@@ -12,7 +12,12 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	bootjar {
+		enabled = true
+	}
+	jar {enabled = false }
 }
+
 
 repositories {
 	mavenCentral()

@@ -5,7 +5,7 @@ FROM openjdk:15
 ARG JAR_FILE=build/libs/*.jar
 
 #Copy project directory in the Docker image directory (/app).
-COPY ${JAR_FILE} goglobal-application-app.jar
+COPY ${JAR_FILE} app.jar
 
 #Add listener to the application's port.
 EXPOSE $PORT

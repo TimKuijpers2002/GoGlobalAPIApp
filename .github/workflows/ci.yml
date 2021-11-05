@@ -41,4 +41,4 @@ jobs:
         docker build . -t goglobal-application-app
     - name: Push to Docker
       run: |
-        docker push goglobal-application-app
+        docker goglobal-application-app push timsku2002/go-global-api-app

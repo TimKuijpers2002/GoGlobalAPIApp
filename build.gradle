@@ -15,6 +15,10 @@ configurations {
 	tasks.jar {
 		enabled = false
 	}
+	tasks.withType(Test) {
+		scanForTestClasses = false
+		include "**/*Test.class" // whatever Ant pattern matches your test class files
+	}
 }
 
 
@@ -24,12 +28,12 @@ repositories {
 
 dependencies {
 	implementation 'org.hibernate:hibernate-gradle-plugin:5.5.8.Final'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator:2.5.5'
-	implementation 'org.springframework.boot:spring-boot-starter-web:2.5.5'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.5'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator:2.5.6'
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.5.6'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.6'
     compileOnly 'org.projectlombok:lombok:1.18.22'
 	annotationProcessor 'org.projectlombok:lombok:1.18.22'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.5'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.6'
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest:2.5.5'
 	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc:9.4.0.jre16'
 }

@@ -21,6 +21,12 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+    - name: Docker login
+      env:
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      run: |
+        docker login -u $username -p $password
     - name: Validate Gradle wrapper
       uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
       
@@ -30,10 +36,9 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
 
-    - name: Build and Push Docker Image
-      uses: mr-smithers-excellent/docker-build-push@v4
-      with:
-        image: timsku2002/go-global-api-app
-        registry: docker.io
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+    - name: Build Docker Image
+      run: |
+        docker build -t goglobal-application-app
+    - name: Push to Docker
+      run: |
+        docker push goglobal-application-app

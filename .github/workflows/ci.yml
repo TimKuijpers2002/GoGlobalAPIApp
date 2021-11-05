@@ -30,14 +30,13 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
 
-    - name: Build Docker Image
-      run: |
-        docker build . -t goglobal-application-app
-    - name: Push to Docker
-      env:
+    - name: Build & Push Image
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
+        image: timsku2002/go-global-api-app
+        registry: docker.io
+        dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      run: |
-        docker login -u $username -p $password
-        docker image push goglobal-application-app
+      
         

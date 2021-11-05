@@ -38,7 +38,7 @@ jobs:
 
     - name: Build Docker Image
       run: |
-        docker build -t goglobal-application-app
+        docker build . -t goglobal-application-app
     - name: Push to Docker
       run: |
         docker push goglobal-application-app

@@ -39,5 +39,5 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       run: |
         docker login -u $username -p $password
-        docker image push timsku2002/go-global-api-app
+        docker image push goglobal-application-app
         

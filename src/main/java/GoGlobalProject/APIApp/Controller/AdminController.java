@@ -27,7 +27,7 @@ public class AdminController {
     @GetMapping("/admins/{id}")
     public ResponseEntity<?> GetAdminById(@PathVariable(value = "id") long admin_id) throws ResourceNotFoundException {
         Admin admin = adminRepository.findById(admin_id)
-                .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Admin could not be found for id:" + admin_id));
+                .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n This admin could not be found for id:" + admin_id));
         return ResponseEntity.ok().body(admin);
     }
 

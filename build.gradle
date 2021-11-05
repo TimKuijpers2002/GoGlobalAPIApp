@@ -13,7 +13,7 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 	tasks.jar {
-		enabled = true
+		enabled = false
 	}
 }
 

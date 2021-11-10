@@ -48,7 +48,9 @@ public class AdminService implements IService<Admin> {
 
     @Override
     public void Delete(long admin_id) {
-        adminRepository.deleteById(admin_id);
+        if (adminRepository.existsById(admin_id)) {
+            adminRepository.deleteByAdminId(admin_id);
+        }
     }
 
     public boolean CheckForDoubleEmails(Admin admin){

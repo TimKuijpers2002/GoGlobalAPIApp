@@ -40,7 +40,9 @@ public class LocationFormService implements IService<LocationForm> {
 
     @Override
     public void Delete(long form_id){
-        locationFormRepository.deleteById(form_id);
+        if (locationFormRepository.existsById(form_id)) {
+            locationFormRepository.deleteByLocationFormId(form_id);
+        }
     }
 
     public boolean CheckForDoubleCoordinates(LocationForm locationForm){

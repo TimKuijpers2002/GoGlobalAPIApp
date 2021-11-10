@@ -52,10 +52,10 @@ public class FormController {
     }
 
     @DeleteMapping("/locationforms/{id}")
-    public ResponseEntity<?> DeleteLocationFrom(@PathVariable(value = "id") long location_form_id) throws ResourceNotFoundException {
-        locationFormRepository.findById(location_form_id)
-                .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Location form could not be found for id:" + location_form_id));
-        locationFormService.Delete(location_form_id);
+    public ResponseEntity<?> DeleteLocationFrom(@PathVariable(value = "id") long form_id) throws ResourceNotFoundException {
+        locationFormRepository.findById(form_id)
+                .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Location form could not be found for id:" + form_id));
+        locationFormService.Delete(form_id);
         return ResponseEntity.ok().build();
     }
 }

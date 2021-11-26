@@ -1,13 +1,13 @@
 package GoGlobalProject.APIApp.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -18,11 +18,17 @@ import java.util.List;
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="category_id")
     private long categoryId;
 
     @Column(name="name")
     private String name;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
+    private Set<LocationForm> locationForms;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
+    private Set<Location> locations;
 }

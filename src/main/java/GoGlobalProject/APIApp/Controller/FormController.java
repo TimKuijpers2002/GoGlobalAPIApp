@@ -1,6 +1,7 @@
 package GoGlobalProject.APIApp.Controller;
 
 import GoGlobalProject.APIApp.CustomError.ResourceNotFoundException;
+import GoGlobalProject.APIApp.Interfaces.ILocationFormService;
 import GoGlobalProject.APIApp.Interfaces.IService;
 import GoGlobalProject.APIApp.Model.LocationForm;
 import GoGlobalProject.APIApp.Repository.LocationFormRepository;
@@ -22,7 +23,7 @@ public class FormController {
 
     @Qualifier("locationFormService")
     @Autowired
-    private IService<LocationForm> locationFormService;
+    private ILocationFormService locationFormService;
 
     @GetMapping("/locationforms/{id}")
     public ResponseEntity<LocationForm> GetLocationFormById(@PathVariable(value = "id") long location_form_id) throws ResourceNotFoundException {
@@ -46,9 +47,19 @@ public class FormController {
     public ResponseEntity<?> CreateLocationFrom(@RequestBody LocationForm locationForm){
         boolean hasError = locationFormService.Create(locationForm);
         if(hasError){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Location already exist for coordinates:" + locationForm.getCoordinates());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Location already exist for coordinates:" + locationForm.getLongitude() + locationForm.getLatitude());
         }
         return ResponseEntity.ok().body(locationForm);
+    }
+
+    @PostMapping("/locationformaccepted")
+    public ResponseEntity<?> AcceptLocationForm(@RequestBody LocationForm locationForm){
+        try{
+            locationFormService.AcceptForm(locationForm);
+            return ResponseEntity.ok().build();
+        }catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.REQUEST_TIMEOUT).build();
+        }
     }
 
     @DeleteMapping("/locationforms/{id}")

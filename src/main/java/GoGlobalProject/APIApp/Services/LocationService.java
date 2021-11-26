@@ -2,7 +2,10 @@ package GoGlobalProject.APIApp.Services;
 
 import GoGlobalProject.APIApp.Interfaces.ILocationService;
 import GoGlobalProject.APIApp.Model.Location;
+import GoGlobalProject.APIApp.Repository.CategoryRepository;
+import GoGlobalProject.APIApp.Repository.FacilityRepository;
 import GoGlobalProject.APIApp.Repository.LocationRepository;
+import GoGlobalProject.APIApp.Repository.TerrainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,15 @@ public class LocationService implements ILocationService<Location> {
 
     @Autowired
     private LocationRepository locationRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    private TerrainRepository terrainRepository;
+
+    @Autowired
+    private FacilityRepository facilityRepository;
 
     @Override
     public Location GetById(long location_id){
@@ -29,6 +41,9 @@ public class LocationService implements ILocationService<Location> {
         if(CheckForDoubleCoordinates(location)){
             return CheckForDoubleCoordinates(location);
         }
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //Find category/facility/terrain and edit the location
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         locationRepository.save(location);
         return false;
     }
@@ -39,7 +54,8 @@ public class LocationService implements ILocationService<Location> {
         if(CheckForDoubleCoordinates(locationDetails)){
             return CheckForDoubleCoordinates(locationDetails);
         }
-        locationOriginal.setCoordinates(locationDetails.getCoordinates());
+        locationOriginal.setLongitude(locationDetails.getLongitude());
+        locationOriginal.setLatitude((locationDetails.getLatitude()));
         locationOriginal.setName(locationDetails.getName());
         locationOriginal.setGeneralContent(locationDetails.getGeneralContent());
         locationOriginal.setFacilities(locationDetails.getFacilities());
@@ -60,7 +76,7 @@ public class LocationService implements ILocationService<Location> {
         var getAllLocations = locationRepository.findAll();
 
         for (var item :getAllLocations) {
-            if (location.getCoordinates().equals(item.getCoordinates())) {
+            if (location.getLatitude().equals(item.getLatitude()) && location.getLongitude().equals(item.getLongitude())) {
                 return true;
             }
         }

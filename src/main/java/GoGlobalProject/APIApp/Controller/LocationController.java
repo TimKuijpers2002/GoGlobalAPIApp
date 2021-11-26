@@ -49,7 +49,7 @@ public class LocationController {
     public ResponseEntity<?> CreateLocation(@RequestBody Location location){
         boolean hasError = locationService.Create(location);
         if(hasError){
-            return ResponseEntity.badRequest().body("Location already exist for coordinates:" + location.getCoordinates());
+            return ResponseEntity.badRequest().body("Location already exist for coordinates:" + location.getLongitude() + location.getLatitude());
         }
         return ResponseEntity.ok().body(location);
     }
@@ -60,7 +60,7 @@ public class LocationController {
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Location could not be found for id:" + location_id));
         boolean hasError = locationService.Update(location_id, locationDetails);
         if(hasError){
-            return ResponseEntity.badRequest().body("Location already exist for coordinates:" + location.getCoordinates());
+            return ResponseEntity.badRequest().body("Location already exist for coordinates:" + location.getLongitude() + location.getLatitude());
         }
         return ResponseEntity.ok().body(location);
     }

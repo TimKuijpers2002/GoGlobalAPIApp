@@ -23,8 +23,11 @@ public class LocationForm {
     @Embedded
     private Form baseForm;
 
-    @Column(name = "coordinates")
-    private String coordinates;
+    @Column(name = "longitude")
+    private Float longitude;
+
+    @Column(name = "latitude")
+    private Float latitude;
 
     @Column(name = "name")
     private String name;
@@ -32,24 +35,24 @@ public class LocationForm {
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "location_form_facility",
-            joinColumns = { @JoinColumn(name = "location_form_id") },
-            inverseJoinColumns = { @JoinColumn(name = "facility_id") }
+            joinColumns = { @JoinColumn(name = "location_form_id", referencedColumnName="location_form_id") },
+            inverseJoinColumns = { @JoinColumn(name = "facility_id", referencedColumnName="facility_id") }
     )
     private Set<Facility> facilities;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "location_form_category",
-            joinColumns = { @JoinColumn(name = "location_form_id") },
-            inverseJoinColumns = { @JoinColumn(name = "category_id") }
+            joinColumns = { @JoinColumn(name = "location_form_id", referencedColumnName="location_form_id")},
+            inverseJoinColumns = { @JoinColumn(name = "category_id", referencedColumnName="category_id")}
     )
     private Set<Category> categories;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "location_form_terrain",
-            joinColumns = { @JoinColumn(name = "location_form_id") },
-            inverseJoinColumns = { @JoinColumn(name = "terrain_id") }
+            joinColumns = { @JoinColumn(name = "location_form_id", referencedColumnName="location_form_id") },
+            inverseJoinColumns = { @JoinColumn(name = "terrain_id", referencedColumnName="terrain_id") }
     )
     private Set<Terrain> terrains;
 }

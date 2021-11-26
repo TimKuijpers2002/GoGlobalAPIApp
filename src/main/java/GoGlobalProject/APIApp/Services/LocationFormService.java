@@ -1,18 +1,32 @@
 package GoGlobalProject.APIApp.Services;
 
+import GoGlobalProject.APIApp.Interfaces.ILocationFormService;
 import GoGlobalProject.APIApp.Interfaces.IService;
+import GoGlobalProject.APIApp.Model.Location;
 import GoGlobalProject.APIApp.Model.LocationForm;
-import GoGlobalProject.APIApp.Repository.LocationFormRepository;
+import GoGlobalProject.APIApp.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class LocationFormService implements IService<LocationForm> {
+public class LocationFormService implements ILocationFormService {
 
     @Autowired
     private LocationFormRepository locationFormRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    private TerrainRepository terrainRepository;
+
+    @Autowired
+    private FacilityRepository facilityRepository;
+
+    @Autowired
+    private LocationRepository locationRepository;
 
     @Override
     public LocationForm GetById(long form_id){
@@ -29,12 +43,10 @@ public class LocationFormService implements IService<LocationForm> {
         if(CheckForDoubleCoordinates(locationForm)){
             return CheckForDoubleCoordinates(locationForm);
         }
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //Find category/facility/terrain and edit the location
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         locationFormRepository.save(locationForm);
-        return false;
-    }
-
-    @Override
-    public boolean Update(long notImplemented, LocationForm notImplemented2){
         return false;
     }
 
@@ -45,11 +57,25 @@ public class LocationFormService implements IService<LocationForm> {
         }
     }
 
+    @Override
+    public Location AcceptForm(LocationForm locationForm){
+        Location newLocation = new Location();
+        newLocation.setTerrains(locationForm.getTerrains());
+        newLocation.setName(locationForm.getName());
+        newLocation.setLongitude(locationForm.getLongitude());
+        newLocation.setLatitude((locationForm.getLatitude()));
+        newLocation.setGeneralContent(locationForm.getBaseForm().getFormContent());
+        newLocation.setFacilities(locationForm.getFacilities());
+        newLocation.setCategories(locationForm.getCategories());
+        locationFormRepository.deleteByLocationFormId(locationForm.getLocationFormId());
+        return locationRepository.save(newLocation);
+    }
+
     public boolean CheckForDoubleCoordinates(LocationForm locationForm){
         var getAllForms = locationFormRepository.findAll();
 
         for (var item :getAllForms) {
-            if (locationForm.getCoordinates().equals(item.getCoordinates())) {
+            if (locationForm.getLatitude().equals(item.getLatitude()) && locationForm.getLongitude().equals(item.getLongitude())) {
                     return true;
                 }
         }

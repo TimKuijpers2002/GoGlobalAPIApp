@@ -17,8 +17,11 @@ public class Location {
     @Column(name="location_id")
     private long locationId;
 
-    @Column(name="coordinates")
-    private String coordinates;
+    @Column(name="longitude")
+    private Float longitude;
+
+    @Column(name="latitude")
+    private Float latitude;
 
     @Column(name="name")
     private String name;
@@ -29,24 +32,24 @@ public class Location {
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "location_facility",
-            joinColumns = { @JoinColumn(name = "location_id") },
-            inverseJoinColumns = { @JoinColumn(name = "facility_id") }
+            joinColumns = { @JoinColumn(name = "location_id", referencedColumnName="location_id") },
+            inverseJoinColumns = { @JoinColumn(name = "facility_id", referencedColumnName="facility_id") }
     )
     private Set<Facility> facilities;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "location_terrain",
-            joinColumns = { @JoinColumn(name = "location_id") },
-            inverseJoinColumns = { @JoinColumn(name = "terrain_id") }
+            joinColumns = { @JoinColumn(name = "location_id", referencedColumnName="location_id") },
+            inverseJoinColumns = { @JoinColumn(name = "terrain_id", referencedColumnName="terrain_id") }
     )
     private Set<Terrain> terrains;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "location_category",
-            joinColumns = { @JoinColumn(name = "location_id") },
-            inverseJoinColumns = { @JoinColumn(name = "category_id") }
+            joinColumns = { @JoinColumn(name = "location_id", referencedColumnName="location_id") },
+            inverseJoinColumns = { @JoinColumn(name = "category_id", referencedColumnName="category_id") }
     )
     private Set<Category> categories;
 

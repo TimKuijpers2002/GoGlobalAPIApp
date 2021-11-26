@@ -5,7 +5,7 @@ import GoGlobalProject.APIApp.CustomError.ResourceNotFoundException;
 import GoGlobalProject.APIApp.Model.Admin;
 import GoGlobalProject.APIApp.Repository.AdminRepository;
 import GoGlobalProject.APIApp.Services.AdminService;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -33,7 +33,7 @@ public class AdminControllerTest {
     AdminService adminService;
 
     @Test
-    void ReturnListWithAdmin_WhenRequested(){
+    public void ReturnListWithAdmins_WhenRequested(){
         //Arrange
         List<Admin> list = new ArrayList<>();
         list.add(new Admin(0, "Tim", "TimKuijpers2002@outlook.com", "TestPWTim"));
@@ -50,7 +50,7 @@ public class AdminControllerTest {
     }
 
     @Test
-    void ReturnAdminById_WhenRequested() throws ResourceNotFoundException {
+    public void ReturnAdminById_WhenRequested() throws ResourceNotFoundException {
         //Arrange
         Admin admin = new Admin(0L, "Tim", "TimKuijpers2002@outlook.com", "TestPWTim");
 

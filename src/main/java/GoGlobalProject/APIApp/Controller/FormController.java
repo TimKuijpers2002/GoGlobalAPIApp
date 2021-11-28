@@ -56,7 +56,7 @@ public class FormController {
     public ResponseEntity<?> AcceptLocationForm(@RequestBody LocationForm locationForm){
         try{
             locationFormService.AcceptForm(locationForm);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body(locationForm);
         }catch (Exception exception){
             return ResponseEntity.status(HttpStatus.REQUEST_TIMEOUT).build();
         }

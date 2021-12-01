@@ -23,7 +23,8 @@ In development the Backend and Frontend is split up so that Reacts auto refresh 
 -   **Windows** 1. Run the docker-compose up to run all the backend containers needed to communicate
     <ins>
     <br>
-    Note: If the you don't have the images on your device, run docker-compose up --build -d to build and run these images</ins>
+    
+    Note: If you don't have the images on your device, run docker-compose up --build -d to build and run these images</ins>
     <br>
 
 ##### Front-end-Dashboard

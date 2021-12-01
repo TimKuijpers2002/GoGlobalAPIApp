@@ -17,6 +17,10 @@ import java.util.NoSuchElementException;
 @RequestMapping("/api")
 public class AdminController {
 
+    private String ResourceNotFoundMessage(long admin_id){
+        return ("ERROR 404 \n Admin could not be found for id:" + admin_id);
+    }
+
     @Autowired
     private AdminRepository adminRepository;
 
@@ -27,7 +31,7 @@ public class AdminController {
     @GetMapping("/admins/{id}")
     public ResponseEntity<Admin> GetAdminById(@PathVariable(value = "id") long admin_id) throws ResourceNotFoundException {
         Admin admin = adminRepository.findById(admin_id)
-                .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Admin could not be found for id:" + admin_id));
+                .orElseThrow(() -> new ResourceNotFoundException(ResourceNotFoundMessage(admin_id)));
         return ResponseEntity.ok().body(admin);
     }
 
@@ -54,7 +58,7 @@ public class AdminController {
     @PutMapping("/admins/{id}")
     public ResponseEntity<Admin> UpdateAdmin(@PathVariable(value = "id") long admin_id, @RequestBody Admin adminDetails) throws Exception {
         Admin admin = adminRepository.findById(admin_id)
-                .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Admin could not be found for id:" + admin_id));
+                .orElseThrow(() -> new ResourceNotFoundException(ResourceNotFoundMessage(admin_id)));
         boolean hasError = adminService.Update(admin_id, adminDetails);
         if(hasError){
             return ResponseEntity.status(HttpStatus.CONFLICT).body(admin);
@@ -65,7 +69,7 @@ public class AdminController {
     @DeleteMapping("/admins/{id}")
     public ResponseEntity<Admin> DeleteAdmin(@PathVariable(value = "id") long admin_id) throws ResourceNotFoundException {
         adminRepository.findById(admin_id)
-                .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Admin could not be found for id:" + admin_id));
+                .orElseThrow(() -> new ResourceNotFoundException(ResourceNotFoundMessage(admin_id)));
         adminService.Delete(admin_id);
         return ResponseEntity.ok().build();
     }

@@ -25,14 +25,14 @@ public class AdminController {
     private IService<Admin> adminService;
 
     @GetMapping("/admins/{id}")
-    public ResponseEntity<?> GetAdminById(@PathVariable(value = "id") long admin_id) throws ResourceNotFoundException {
+    public ResponseEntity<Admin> GetAdminById(@PathVariable(value = "id") long admin_id) throws ResourceNotFoundException {
         Admin admin = adminRepository.findById(admin_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Admin could not be found for id:" + admin_id));
         return ResponseEntity.ok().body(admin);
     }
 
     @GetMapping("/admins")
-    public ResponseEntity<?> GetAllAdmin(){
+    public ResponseEntity<List<Admin>> GetAllAdmin(){
         try {
             List<Admin> adminList = adminService.GetAll();
             return ResponseEntity.ok().body(adminList);
@@ -43,27 +43,27 @@ public class AdminController {
     }
 
     @PostMapping("/admins")
-    public ResponseEntity<?> CreateAdmin(@RequestBody Admin admin){
+    public ResponseEntity<Admin> CreateAdmin(@RequestBody Admin admin){
         boolean hasError = adminService.Create(admin);
         if(hasError){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Admin already exist for email:" + admin.getEmail());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(admin);
         }
         return ResponseEntity.ok().body(admin);
     }
 
     @PutMapping("/admins/{id}")
-    public ResponseEntity<?> UpdateAdmin(@PathVariable(value = "id") long admin_id, @RequestBody Admin adminDetails) throws Exception {
+    public ResponseEntity<Admin> UpdateAdmin(@PathVariable(value = "id") long admin_id, @RequestBody Admin adminDetails) throws Exception {
         Admin admin = adminRepository.findById(admin_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Admin could not be found for id:" + admin_id));
         boolean hasError = adminService.Update(admin_id, adminDetails);
         if(hasError){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Admin already exist for email:" + adminDetails.getEmail());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(admin);
         }
         return ResponseEntity.ok().body(admin);
     }
 
     @DeleteMapping("/admins/{id}")
-    public ResponseEntity<?> DeleteAdmin(@PathVariable(value = "id") long admin_id) throws ResourceNotFoundException {
+    public ResponseEntity<Admin> DeleteAdmin(@PathVariable(value = "id") long admin_id) throws ResourceNotFoundException {
         adminRepository.findById(admin_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Admin could not be found for id:" + admin_id));
         adminService.Delete(admin_id);

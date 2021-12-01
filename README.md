@@ -28,7 +28,7 @@ In development the Backend and Frontend is split up so that Reacts auto refresh 
 
 ##### Front-end-Dashboard
 
-# Repository for the [FrontEnd](https://github.com/TimKuijpers2002/goglobaldashboard)
+##### Repository for the [FrontEnd](https://github.com/TimKuijpers2002/goglobaldashboard)
 
 1. Open Terminal in yourFolder/goglobaldashboard folder
 2. Run `npm i` (This will install all packages in package.json);

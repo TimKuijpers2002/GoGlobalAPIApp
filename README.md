@@ -21,12 +21,16 @@ In development the Backend and Frontend is split up so that Reacts auto refresh 
 ##### Backend
 
 -   **Windows** 1. Run the docker-compose up to run all the backend containers needed to communicate
-    <ins>Note: If the you don't have the images on your device, run docker-compose up --build -d to build and run these images</ins>
+    <ins>
+    <br>
+    Note: If the you don't have the images on your device, run docker-compose up --build -d to build and run these images</ins>
     <br>
 
 ##### Front-end-Dashboard
 
-1. Open Terminal in Frontend/goglobaldashboard-Frontend folder
+###Repository for the FrontEnd(https://github.com/TimKuijpers2002/goglobaldashboard)
+
+1. Open Terminal in yourFolder/goglobaldashboard folder
 2. Run `npm i` (This will install all packages in package.json);
 3. Run `npm start`
 

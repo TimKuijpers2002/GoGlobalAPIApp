@@ -14,7 +14,7 @@
 
 #### Development:
 
-In development the Backend and Frontend is split up so that Reacts auto refresh on code update can still be used
+- In development the Backend and Frontend is split up so that Reacts auto refresh on code update can still be used
 
 ##### Backend
 
@@ -27,13 +27,13 @@ In development the Backend and Frontend is split up so that Reacts auto refresh 
 
 ##### Front-end-Dashboard
 
-Repository for the [FrontEnd](https://github.com/TimKuijpers2002/goglobaldashboard)
+- Repository for the [FrontEnd](https://github.com/TimKuijpers2002/goglobaldashboard)
 
 1. Open Terminal in yourFolder/goglobaldashboard folder
 2. Run `npm i` (This will install all packages in package.json);
 3. Run `npm start`
 
-If followed the steps for backend and front-end correctly you should now have a fully functioning webapp running at [**React app**](http://localhost:3000)
+- If followed the steps for backend and front-end correctly you should now have a fully functioning webapp running at [**React app**](http://localhost:3000)
 
 ### Information regarding techniques used in project:
 

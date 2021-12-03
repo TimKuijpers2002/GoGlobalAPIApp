@@ -6,8 +6,9 @@
 
 ### Run Application
 
-The entire application is setup to run using Docker images, this means that running it either in production or development there should not be any platform changes that could break the code. -
-HOWEVER, THERE IS A BUG WHICH CAUSES THE CONTAINER TO GET INTO AN INFINITE RESTARTING LOOP. AS OF RIGHT NOW, ONLY AVAILABLE ON LOCALHOST!
+- The entire application is setup to run using Docker images, this means that running it either in production or development there should not be any platform changes that could break the code.
+
+- HOWEVER, THERE IS A BUG WHICH CAUSES THE CONTAINER TO GET INTO AN INFINITE RESTARTING LOOP. AS OF RIGHT NOW, ONLY AVAILABLE ON LOCALHOST!
 
 > **Docker should be install before trying to run the application**
 

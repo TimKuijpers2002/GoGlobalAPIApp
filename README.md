@@ -47,6 +47,6 @@
 
 -   ##### Quality control using sonarqube:
 
-    1. Code coverage is at least (Currently 0.0%, due to configurations) **70%**
-    2. Duplication code is less then **1%**
-    3. All tests run succesfully
+1. Code coverage is at least (Currently 0.0%, due to configurations) **70%**
+2. Duplication code is less then **1%**
+3. All tests run succesfully

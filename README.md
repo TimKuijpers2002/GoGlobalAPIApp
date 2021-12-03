@@ -1,4 +1,5 @@
 ![Go_Global](https://user-images.githubusercontent.com/57141910/144594993-82db30b7-3c19-42f6-8592-2b008378e20d.png)
+
 [Run Application](#Run-Application)
 
 [Information regarding application](#Information-regarding-techniques-used-in-project)

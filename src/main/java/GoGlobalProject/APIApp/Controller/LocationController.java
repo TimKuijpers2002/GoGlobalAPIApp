@@ -27,46 +27,50 @@ public class LocationController {
     @Autowired
     private ILocationService<Location> locationService;
 
+    private String ResourceNotFoundMessage(long location_id){
+        return ("ERROR 404 \n Location could not be found for id:" + location_id);
+    }
+
     @GetMapping("/locations/{id}")
     public ResponseEntity<Location> GetLocationById(@PathVariable(value = "id") long location_id) throws ResourceNotFoundException {
         Location location = locationRepository.findById(location_id)
-                .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Location could not be found for id:" + location_id));
+                .orElseThrow(() -> new ResourceNotFoundException(ResourceNotFoundMessage(location_id)));
         return ResponseEntity.ok().body(location);
     }
 
     @GetMapping("/locations")
-    public ResponseEntity<?> GetAllLocation(){
+    public ResponseEntity<List<Location>> GetAllLocation(){
         try {
             List<Location> locationList = locationService.GetAll();
             return ResponseEntity.ok().body(locationList);
         } catch (
                 NoSuchElementException exception) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping("/locations")
-    public ResponseEntity<?> CreateLocation(@RequestBody Location location){
+    public ResponseEntity<Location> CreateLocation(@RequestBody Location location){
         boolean hasError = locationService.Create(location);
         if(hasError){
-            return ResponseEntity.badRequest().body("Location already exist for coordinates:" + location.getLongitude() + location.getLatitude());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(location);
         }
         return ResponseEntity.ok().body(location);
     }
 
     @PutMapping("/locations/{id}")
-    public ResponseEntity<?> UpdateLocation(@PathVariable(value = "id") long location_id, @RequestBody Location locationDetails) throws ResourceNotFoundException {
+    public ResponseEntity<Location> UpdateLocation(@PathVariable(value = "id") long location_id, @RequestBody Location locationDetails) throws ResourceNotFoundException {
         Location location = locationRepository.findById(location_id)
-                .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Location could not be found for id:" + location_id));
+                .orElseThrow(() -> new ResourceNotFoundException(ResourceNotFoundMessage(location_id)));
         boolean hasError = locationService.Update(location_id, locationDetails);
         if(hasError){
-            return ResponseEntity.badRequest().body("Location already exist for coordinates:" + location.getLongitude() + location.getLatitude());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(location);
         }
         return ResponseEntity.ok().body(location);
     }
 
     @DeleteMapping("/locations/{id}")
-    public ResponseEntity<?> DeleteLocation(@PathVariable(value = "id") long location_id) throws ResourceNotFoundException {
+    public ResponseEntity<Location> DeleteLocation(@PathVariable(value = "id") long location_id) throws ResourceNotFoundException {
         locationRepository.findById(location_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Location could not be found for id:" + location_id));
         locationService.Delete(location_id);
@@ -74,7 +78,7 @@ public class LocationController {
     }
 
     @PutMapping("/locations/like/{id}")
-    public ResponseEntity<?> LikeLocation(@PathVariable(value = "id") long location_id) throws ResourceNotFoundException {
+    public ResponseEntity<Location> LikeLocation(@PathVariable(value = "id") long location_id) throws ResourceNotFoundException {
         locationRepository.findById(location_id)
                 .orElseThrow(() -> new ResourceNotFoundException("ERROR 404 \n Location could not be found for id:" + location_id));
         locationService.LikeLocation(location_id);

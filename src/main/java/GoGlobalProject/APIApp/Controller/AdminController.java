@@ -42,7 +42,7 @@ public class AdminController {
             return ResponseEntity.ok().body(adminList);
         } catch (
                 NoSuchElementException exception) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

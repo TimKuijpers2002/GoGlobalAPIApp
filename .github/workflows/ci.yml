@@ -51,7 +51,7 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
         image: timsku2002/go-global-api-app
-        tags: 10-12-2021, v1
+        tags: 10-12-2021-v1-nc
         registry: docker.io
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_HUB_USERNAME }}

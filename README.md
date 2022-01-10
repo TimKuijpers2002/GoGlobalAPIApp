@@ -14,7 +14,7 @@
 
 #### Development:
 
-- In development the Backend and Frontend is split up so that Reacts auto refresh on code update can still be used
+- In development the Backend and Frontend is split up so that Reacts auto refresh on code update can still be used.
 
 ##### Backend
 
@@ -33,20 +33,20 @@
 2. Run `npm i` (This will install all packages in package.json);
 3. Run `npm start`
 
-- If followed the steps for backend and front-end correctly you should now have a fully functioning webapp running at [**React app**](http://localhost:3000)
+- If followed the steps for backend and front-end correctly you should now have a fully functioning webapp running at [**React app**](http://localhost:3000).
 
 ### Information regarding techniques used in project:
 
 -   #### Frontend
     -   React application in combination with javascrypt & HTTML/CSS.
 -   #### Backend
-    -   Backend services are using `JAVA 15`
-    -   The admin and location backend service are using `Hibernate` to get data from database
+    -   Backend services are using `JAVA 15`.
+    -   The admin and location backend service are using `Hibernate` to get data from database.
 
 ### Quality Assurance:
 
 -   ##### Quality control using sonarqube:
 
-1. Code coverage is at least (Currently 0.0%, due to configurations) **70%**
-2. Duplication code is less then **1%**
-3. All tests run succesfully
+1. Code coverage is at least (Currently 0.0%, due to configurations) **70%**.
+2. Duplication code is less then **1%**.
+3. All tests run succesfully.

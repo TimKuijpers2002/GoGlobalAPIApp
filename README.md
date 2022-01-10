@@ -10,7 +10,7 @@
 
 - HOWEVER, THERE IS A BUG WHICH CAUSES THE CONTAINER TO GET INTO AN INFINITE RESTARTING LOOP. AS OF RIGHT NOW, ONLY AVAILABLE ON LOCALHOST!
 
-> **Docker should be install before trying to run the application**
+> **Docker should be installed before trying to run the application**
 
 #### Development:
 
@@ -18,7 +18,7 @@
 
 ##### Backend
 
--   **Windows** 1. Run the docker-compose up to run all the backend containers needed to communicate.
+-   **Windows** Run the docker-compose up to run all the backend containers needed to communicate.
     <ins>
     <br>
     

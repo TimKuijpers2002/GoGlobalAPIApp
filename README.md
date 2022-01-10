@@ -22,7 +22,7 @@
     <ins>
     <br>
     
-    Note: If you don't have the images on your device, run docker-compose up --build -d to build and run these images</ins>
+    Note: If you don't have the images on your device, run docker-compose up --build -d to build and run these images.</ins>
     <br>
 
 ##### Front-end-Dashboard

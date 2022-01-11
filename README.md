@@ -18,7 +18,7 @@
 
 ##### Backend
 
--   **Windows** Run the docker-compose up to run all the backend containers needed to communicate.
+-   **Windows**: Run the docker-compose up to run all the backend containers needed to communicate.
     <ins>
     <br>
     

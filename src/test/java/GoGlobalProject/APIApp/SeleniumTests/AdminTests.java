@@ -30,8 +30,8 @@ public class AdminTests {
         SetupDriver();
         Thread.sleep(2000);
         driver.findElement(By.name("add-admin-btn")).click();
-        driver.findElement(By.name("name")).sendKeys("John");
-        driver.findElement(By.name("email")).sendKeys("John@doe.com");
+        driver.findElement(By.name("name")).sendKeys("Johny");
+        driver.findElement(By.name("email")).sendKeys("Johny@doe.com");
         driver.findElement(By.name("password")).sendKeys("DoePW");
 
         driver.findElement(By.name("post-btn")).click();

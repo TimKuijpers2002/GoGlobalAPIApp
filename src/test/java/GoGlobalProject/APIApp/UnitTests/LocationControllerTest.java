@@ -66,7 +66,7 @@ public class LocationControllerTest {
     }
 
     @Test
-    public void ShouldNOTPOSTAdmin_WhenDoubleEmail_isGiven(){
+    public void ShouldNOTPOSTLocation_WhenDoubleCoordinate_isGiven(){
         //Arrange
         List<Location> list = new ArrayList<>();
         Location empOne = new Location(0L, 10F, 20F, "loc1", "content1", null, null, null, 0);
@@ -92,7 +92,7 @@ public class LocationControllerTest {
     }
 
     @Test
-    public void ShouldDELETEAdmin_WhenIDisGiven() throws ResourceNotFoundException {
+    public void ShouldDELETELocation_WhenIDisGiven() throws ResourceNotFoundException {
         //Arrange
         Location locationToDelete = new Location(1L, 10F, 20F, "loc1", "content1", null, null, null, 0);
 
@@ -106,7 +106,7 @@ public class LocationControllerTest {
     }
 
     @Test
-    public void ShouldPOSTAdmin_WhenDataGiven(){
+    public void ShouldPOSTLocation_WhenDataGiven(){
         //Arrange
         Location location = new Location(0L, 10F, 20F, "loc1", "content1", null, null, null, 0);
         when(locationService.Create(any(Location.class))).thenReturn(false);
